@@ -1,23 +1,5 @@
-'''
-Literally copied this lol
-+-------------------+        +-----------------------+        +------------------+        +------------------------+
-|   Step 1: Install |        |  Step 2: Real-Time    |        |  Step 3: Pass    |        |  Step 4: Live Audio    |
-|   Python Libraries|        |  Transcription with   |        |  Real-Time       |        |  Stream from ElevenLabs|
-+-------------------+        |       AssemblyAI      |        |  Transcript to   |        |                        |
-|                   |        +-----------------------+        |      OpenAI      |        +------------------------+
-| - assemblyai      |                    |                    +------------------+                    |
-| - openai          |                    |                             |                              |
-| - elevenlabs      |                    v                             v                              v
-| - mpv             |        +-----------------------+        +------------------+        +------------------------+
-| - portaudio       |        |                       |        |                  |        |                        |
-+-------------------+        |  AssemblyAI performs  |-------->  OpenAI generates|-------->  ElevenLabs streams   |
-                             |  real-time speech-to- |        |  response based  |        |  response as live      |
-                             |  text transcription   |        |  on transcription|        |  audio to the user     |
-                             |                       |        |                  |        |                        |
-                             +-----------------------+        +------------------+        +------------------------+
-
 ###### Step 1: Install Python libraries ######
-
+'''
 brew install portaudio
 pip install "assemblyai[extras]"
 pip install elevenlabs==0.3.0b0
@@ -31,6 +13,8 @@ from openai import OpenAI
 
 import keyboard
 import sys
+
+# adding env stuff for api keys
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -46,7 +30,6 @@ prompt = "You are the Genie from Aladdin and your job is to respectfully " \
 
 class AI_Assistant:
     def __init__(self):
-
         aai.settings.api_key = os.getenv("AAI_API_KEY")
         self.openai_client = OpenAI(api_key = os.getenv("OPENAI_API_KEY"))
         self.elevenlabs_api_key = os.getenv("ELEVEN_LABS_API_KEY")
